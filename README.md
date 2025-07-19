@@ -1,0 +1,1 @@
+kubectl edit application ingress-nginx -n argocd => xóa ingerss
