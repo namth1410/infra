@@ -7,13 +7,11 @@ spec:
   project: default
   source:
     repoURL: https://kubernetes.github.io/ingress-nginx
-    chart: ingress-nginx
-    targetRevision: 4.10.0 # hoặc version mới nhất
+    path: ingress-nginx
+    targetRevision: 4.10.0
     helm:
-      values: |
-        controller:
-          publishService:
-            enabled: true
+      valueFiles:
+        - values.yaml
   destination:
     namespace: ingress-nginx
     server: https://kubernetes.default.svc
