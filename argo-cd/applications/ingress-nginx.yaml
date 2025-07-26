@@ -16,3 +16,16 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+      - ServerSideApply=true
+  ignoreDifferences:
+    - group: "apps"
+      kind: "Deployment"
+      jsonPointers:
+        - /spec/selector
+        - /spec/template/metadata/annotations
+    - group: admissionregistration.k8s.io
+      kind: MutatingWebhookConfiguration
+      name: ingress-nginx-admission
+      jsonPointers:
+        - /webhooks/0/clientConfig/caBundle
