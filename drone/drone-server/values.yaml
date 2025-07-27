@@ -7,7 +7,6 @@ env:
   DRONE_RPC_SECRET: "super-secret-rpc-key"
   DRONE_SERVER_HOST: "drone-server.drone.svc.cluster.local"
   DRONE_SERVER_PROTO: "http"
-  DRONE_SERVER_PORT: "80"
   DRONE_USER_CREATE: "username:namth1410,admin:true"
   DRONE_GITHUB_SERVER: "https://github.com"
   DRONE_LOGS_DEBUG: "true"
