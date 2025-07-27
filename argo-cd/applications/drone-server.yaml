@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: drone-server
+  namespace: argocd
+spec:
+  project: default
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: drone
+  source:
+    repoURL: https://charts.drone.io
+    chart: drone
+    targetRevision: 0.6.9
+    helm:
+      values: |
+        ingress:
+          enabled: false  # không dùng ingress
+        service:
+          type: ClusterIP
+          port: 80
+        env:
+          DRONE_SERVER_HOST: localhost:30080
+          DRONE_GITHUB_CLIENT_ID: "Ov23lihzi1is7mIEwvEk"
+          DRONE_GITHUB_CLIENT_SECRET: "1124672a2fb40b39306035bbaf9ae77aa63ea539"
+          DRONE_RPC_SECRET: "super-secret-rpc-key"
+          DRONE_SERVER_PROTO: "http"
+          DRONE_USER_CREATE: "username:namth1410,admin:true"
+          DRONE_GITHUB_SERVER: "https://github.com"
+          DRONE_LOGS_DEBUG: "true"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
