@@ -9,11 +9,12 @@ spec:
     server: https://kubernetes.default.svc
     namespace: drone
   source:
-      repoURL: https://github.com/namth1410/infra.git
-      targetRevision: main
-      path: drone/drone-server
-      directory:
-        recurse: true
+      repoURL: https://charts.drone.io
+      chart: drone
+      targetRevision: 0.6.5
+      helm:
+        valueFiles:
+          - https://raw.githubusercontent.com/namth1410/infra/refs/heads/main/drone/drone-server/values.yaml
   syncPolicy:
     automated:
       prune: true
