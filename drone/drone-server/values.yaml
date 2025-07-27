@@ -2,7 +2,7 @@ env:
   DRONE_GITHUB_CLIENT_ID: "Ov23lihzi1is7mIEwvEk"
   DRONE_GITHUB_CLIENT_SECRET: "1124672a2fb40b39306035bbaf9ae77aa63ea539"
   DRONE_RPC_SECRET: "super-secret-rpc-key"
-  DRONE_SERVER_HOST: "localhost:8080"
+  DRONE_SERVER_HOST: "localhost:30080"
   DRONE_SERVER_PROTO: "http"
   DRONE_USER_CREATE: "username:namth1410,admin:true"
   DRONE_GITHUB_SERVER: "https://github.com"
@@ -10,6 +10,6 @@ env:
 
 service:
   type: ClusterIP
-
+  port: 80
 ingress:
   enabled: false
