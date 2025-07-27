@@ -11,9 +11,7 @@ spec:
   source:
     repoURL: https://github.com/namth1410/infra.git
     targetRevision: main
-    path: drone/drone-server  # thư mục này chứa file storage-class.yaml
-    directory:
-      include: ["storage-class.yaml"]
+    path: storage
   syncPolicy:
     automated:
       prune: true
