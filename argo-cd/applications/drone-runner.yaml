@@ -40,6 +40,12 @@ spec:
               - pgrep drone-runner
           initialDelaySeconds: 5
           periodSeconds: 10
+
+        dind:
+          livenessProbe:
+            enabled: false
+          readinessProbe:
+            enabled: false
   syncPolicy:
     automated:
       prune: true
