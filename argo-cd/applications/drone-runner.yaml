@@ -20,7 +20,28 @@ spec:
           DRONE_RPC_SECRET: super-secret-rpc-key
           DRONE_RUNNER_CAPACITY: 1
           DRONE_RUNNER_NAME: runner-1
+
+        livenessProbe:
+          enabled: true
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - pgrep drone-runner
+          initialDelaySeconds: 10
+          periodSeconds: 30
+
+        readinessProbe:
+          enabled: true
+          exec:
+            command:
+              - /bin/sh
+              - -c
+              - pgrep drone-runner
+          initialDelaySeconds: 5
+          periodSeconds: 10
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+  
