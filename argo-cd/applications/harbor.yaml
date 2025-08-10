@@ -29,6 +29,13 @@ spec:
               size: 1Gi
             redis:
               size: 1Gi
+        portal:
+          service:
+            type: ClusterIP
+
+        core:
+          service:
+            type: ClusterIP
   destination:
     server: https://kubernetes.default.svc
     namespace: harbor
