@@ -1,53 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: drone-runner
+  name: drone-runner-kube
   namespace: argocd
 spec:
   project: default
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: drone
   source:
     repoURL: https://charts.drone.io
-    chart: drone-runner-docker
-    targetRevision: 0.7.0
+    chart: drone-runner-kube
+    targetRevision: 0.1.10 # phiên bản chart, lấy từ ArtifactHub
     helm:
       values: |
         env:
-          DRONE_RPC_PROTO: http
-          DRONE_RPC_HOST: drone.drone.svc.cluster.local
+          DRONE_RPC_HOST: drone-server.drone.svc.cluster.local
           DRONE_RPC_SECRET: super-secret-rpc-key
-          DRONE_RUNNER_CAPACITY: 1
-          DRONE_RUNNER_NAME: runner-1
-
-        livenessProbe:
-          enabled: true
-          exec:
-            command:
-              - /bin/sh
-              - -c
-              - pgrep drone-runner
-          initialDelaySeconds: 10
-          periodSeconds: 30
-
-        readinessProbe:
-          enabled: true
-          exec:
-            command:
-              - /bin/sh
-              - -c
-              - pgrep drone-runner
-          initialDelaySeconds: 5
-          periodSeconds: 10
-
-        dind:
-          livenessProbe:
-            enabled: false
-          readinessProbe:
-            enabled: false
+          DRONE_RPC_PROTO: http
+        serviceAccount:
+          create: true
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: drone
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-  
