@@ -20,12 +20,13 @@ spec:
             annotations:
               kubernetes.io/ingress.class: nginx
               nginx.ingress.kubernetes.io/proxy-body-size: "0"
-              # nginx.ingress.kubernetes.io/rewrite-target: /$2
+              nginx.ingress.kubernetes.io/rewrite-target: /$2
             paths:
               core: /harbor(/|$)(.*)
               notary: /harbor/notary(/|$)(.*)
           tls:
             enabled: false
+          externalURL: http://localhost:32104/harbor
 
         harborAdminPassword: "01664157092a"
 
