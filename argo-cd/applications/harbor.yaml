@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: harbor
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://helm.goharbor.io
+    chart: harbor
+    targetRevision: 1.17.2
+    helm:
+      values: |
+        expose:
+          type: nodePort
+          tls:
+            enabled: false
+        externalURL: http://harbor-core.harbor.svc.cluster.local
+        harborAdminPassword: "01664157092a"
+        persistence:
+          persistentVolumeClaim:
+            registry:
+              size: 5Gi
+            chartmuseum:
+              size: 1Gi
+            jobservice:
+              size: 1Gi
+            database:
+              size: 1Gi
+            redis:
+              size: 1Gi
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: harbor
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
