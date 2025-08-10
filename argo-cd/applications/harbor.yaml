@@ -26,7 +26,7 @@ spec:
           tls:
             enabled: false
 
-        # externalURL: http://localhost:8082
+          externalURL: http://localhost:8082/harbor
         harborAdminPassword: "01664157092a"
 
         persistence:
