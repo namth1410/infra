@@ -8,3 +8,8 @@ ibhLYtMlTn7mdpag
 
 argocd login localhost:8080 --username admin --password ibhLYtMlTn7mdpag  
 ```
+
+
+argo 8080
+drone 8081
+harbor 8082

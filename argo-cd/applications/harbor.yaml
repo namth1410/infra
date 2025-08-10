@@ -12,10 +12,10 @@ spec:
     helm:
       values: |
         expose:
-          type: nodePort
+          type: clusterIP
           tls:
             enabled: false
-        externalURL: http://harbor-core.harbor.svc.cluster.local
+        externalURL: http://localhost:8082
         harborAdminPassword: "01664157092a"
         persistence:
           persistentVolumeClaim:
