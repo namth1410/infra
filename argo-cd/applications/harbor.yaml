@@ -12,11 +12,23 @@ spec:
     helm:
       values: |
         expose:
-          type: clusterIP
+          type: ingress
+          ingress:
+            hosts:
+              core: localhost
+              notary: localhost
+            annotations:
+              kubernetes.io/ingress.class: nginx
+              nginx.ingress.kubernetes.io/proxy-body-size: "0"
+            paths:
+              core: /
+              notary: /
           tls:
             enabled: false
+
         externalURL: http://localhost:8082
         harborAdminPassword: "01664157092a"
+
         persistence:
           persistentVolumeClaim:
             registry:
@@ -29,13 +41,6 @@ spec:
               size: 1Gi
             redis:
               size: 1Gi
-        portal:
-          service:
-            type: ClusterIP
-
-        core:
-          service:
-            type: ClusterIP
   destination:
     server: https://kubernetes.default.svc
     namespace: harbor
