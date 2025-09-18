@@ -16,20 +16,13 @@ spec:
       containers:
         - name: cloudflared
           image: cloudflare/cloudflared:latest
-          command: ["cloudflared", "tunnel", "--no-autoupdate", "run", "--config", "/etc/cloudflared/config.yaml"]
+          command: ["cloudflared", "tunnel", "run", "58c2d850-c1d3-4c31-8954-864c772e37de", "--no-autoupdate"]
           volumeMounts:
             - name: credentials
               mountPath: /etc/cloudflared/credentials.json
               subPath: credentials.json
               readOnly: true
-            - name: config
-              mountPath: /etc/cloudflared/config.yaml
-              subPath: config.yaml
-              readOnly: true
       volumes:
         - name: credentials
           secret:
             secretName: cloudflared-credentials
-        - name: config
-          configMap:
-            name: cloudflared-config
