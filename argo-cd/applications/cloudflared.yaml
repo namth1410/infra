@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/namth1410/infra.git
-    path: infrastructure/cloudflared
+    path: cloudflared
     targetRevision: main
   destination:
     server: https://kubernetes.default.svc
