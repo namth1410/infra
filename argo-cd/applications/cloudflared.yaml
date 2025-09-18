@@ -6,9 +6,12 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/namth1410/infra.git
-    path: cloudflared
-    targetRevision: main
+    repoURL: https://charts.bitnami.com/bitnami   # Helm chart repo
+    chart: cloudflared                             # Tên chart trong repo
+    targetRevision: latest                          # Version chart
+    helm:
+      valueFiles:
+        - https://raw.githubusercontent.com/namth1410/infra/main/cloudflared/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: cloudflared
