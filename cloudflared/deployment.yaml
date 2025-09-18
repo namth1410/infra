@@ -16,7 +16,14 @@ spec:
       containers:
         - name: cloudflared
           image: cloudflare/cloudflared:latest
-          command: ["cloudflared", "tunnel", "run", "58c2d850-c1d3-4c31-8954-864c772e37de", "--no-autoupdate"]
+          command:
+            - cloudflared
+            - tunnel
+            - run
+            - 58c2d850-c1d3-4c31-8954-864c772e37de
+            - --no-autoupdate
+            - --credentials-file
+            - /etc/cloudflared/credentials.json
           volumeMounts:
             - name: credentials
               mountPath: /etc/cloudflared/credentials.json
