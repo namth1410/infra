@@ -21,13 +21,9 @@ spec:
             - tunnel
             - run
             - 58c2d850-c1d3-4c31-8954-864c772e37de
-            - --no-autoupdate
-            - --origincert
-            - /etc/cloudflared/credentials.json
           volumeMounts:
             - name: credentials
-              mountPath: /etc/cloudflared/credentials.json
-              subPath: credentials.json
+              mountPath: /etc/cloudflared/
               readOnly: true
       volumes:
         - name: credentials
