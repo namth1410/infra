@@ -3,5 +3,5 @@ credentials-file: /etc/cloudflared/58c2d850-c1d3-4c31-8954-864c772e37de.json
 
 ingress:
   - hostname: drone.namth.online
-    service: http://drone-server.cloudflared.svc.cluster.local:8080
+    service: http://drone-server.cloudflared.svc.cluster.local:80
   - service: http_status:404
