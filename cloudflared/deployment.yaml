@@ -26,7 +26,8 @@ spec:
             - /etc/cloudflared/58c2d850-c1d3-4c31-8954-864c772e37de.json
           volumeMounts:
             - name: credentials
-              mountPath: /etc/cloudflared/
+              mountPath: /etc/cloudflared/58c2d850-c1d3-4c31-8954-864c772e37de.json
+              subPath: credentials.json
               readOnly: true
       volumes:
         - name: credentials
