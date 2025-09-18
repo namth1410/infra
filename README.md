@@ -6,6 +6,8 @@ argo pass:
 
 ibhLYtMlTn7mdpag
 
+hGuCynWIdoNCXmuO (pass argo cty)
+
 argocd login localhost:8080 --username admin --password ibhLYtMlTn7mdpag  
 ```
 
