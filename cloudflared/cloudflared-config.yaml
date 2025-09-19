@@ -12,7 +12,7 @@ data:
       - hostname: drone.namth.online
         service: http://drone-server.drone.svc.cluster.local:80
       - hostname: threads.namth.online
-        service: http://threads.threads-dev.svc.cluster.local:8080
+        service: http://threads.threads-dev.svc.cluster.local:80
       - hostname: argocd.namth.online
         service: https://argocd-server.argocd.svc.cluster.local:443
         originRequest:
