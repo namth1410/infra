@@ -12,7 +12,7 @@ spec:
           - path: 'manifests/overlays/*/*'
   template:
     metadata:
-      name: 'threads-{{path[1]}}-{{path.basename}}'
+      name: 'threads-{{path[2]}}-{{path.basename}}'
     spec:
       project: threads
       source:
@@ -21,7 +21,7 @@ spec:
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: 'threads-{{path[1]}}'
+        namespace: 'threads-{{path[2]}}'
       syncPolicy:
         automated:
           prune: true
