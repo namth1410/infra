@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: threads
+  namespace: argocd
+spec:
+  description: Project cho hệ thống Threads
+  sourceRepos:
+    - 'https://github.com/namth1410/threads-infra.git'
+  destinations:
+    - namespace: 'threads-*'
+      server: https://kubernetes.default.svc
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'

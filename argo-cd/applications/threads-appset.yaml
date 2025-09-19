@@ -5,23 +5,23 @@ metadata:
   namespace: argocd
 spec:
   generators:
-  - git:
-      repoURL: 'https://github.com/namth1410/threads-infra.git'
-      revision: main
-      directories:
-      - path: 'overlays/*'
+    - git:
+        repoURL: 'https://github.com/namth1410/threads-infra.git'
+        revision: main
+        directories:
+          - path: 'manifests/overlays/*/*'
   template:
     metadata:
-      name: 'threads-{{path.basename}}'
+      name: 'threads-{{path[1]}}-{{path.basename}}'
     spec:
-      project: default
+      project: threads
       source:
         repoURL: 'https://github.com/namth1410/threads-infra.git'
         targetRevision: main
         path: '{{path}}'
       destination:
         server: https://kubernetes.default.svc
-        namespace: 'threads-{{path.basename}}'
+        namespace: 'threads-{{path[1]}}'
       syncPolicy:
         automated:
           prune: true
