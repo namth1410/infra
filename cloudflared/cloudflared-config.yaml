@@ -13,6 +13,8 @@ data:
         service: http://drone-server.drone.svc.cluster.local:80
       - hostname: threads.namth.online
         service: http://threads.threads-dev.svc.cluster.local:80
+      - hostname: threads-api.namth.online
+        service: http://api.threads-dev.svc.cluster.local:3000
       - hostname: minio.namth.online
         service: http://minio.threads-dev.svc.cluster.local:9001
       - hostname: argocd.namth.online
