@@ -11,6 +11,10 @@ data:
     ingress:
       - hostname: drone.namth.online
         service: http://drone-server.drone.svc.cluster.local:80
+      - hostname: threads.namth.online
+        service: http://threads.threads-dev.svc.cluster.local:70
+      - hostname: argocd.namth.online
+        service: http://argocd-server.argocd.svc.cluster.local:8080
       - service: http_status:404
 spec:
   replicas: 1
