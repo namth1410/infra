@@ -14,7 +14,7 @@ data:
       - hostname: threads.namth.online
         service: http://threads.threads-dev.svc.cluster.local:70
       - hostname: argocd.namth.online
-        service: http://argocd-server.argocd.svc.cluster.local:8080
+        service: https://argocd-server.argocd.svc.cluster.local:443
         originRequest:
           noTLSVerify: true
       - service: http_status:404
