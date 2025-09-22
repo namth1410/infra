@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drone-server
+  namespace: drone
+spec:
+  template:
+    spec:
+      containers:
+      - name: server
+        readinessProbe: null
+        livenessProbe: null
