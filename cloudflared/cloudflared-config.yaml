@@ -16,9 +16,9 @@ data:
       - hostname: threads-api.namth.online
         service: http://api.threads-dev.svc.cluster.local:3000
       - hostname: minio-api.namth.online
-        service: http://minio.threads-dev.svc.cluster.local:9000
+        service: http://minio-api.threads-dev.svc.cluster.local:9000
       - hostname: minio.namth.online
-        service: http://minio.threads-dev.svc.cluster.local:9001
+        service: http://minio-console.threads-dev.svc.cluster.local:9001
       - hostname: argocd.namth.online
         service: https://argocd-server.argocd.svc.cluster.local:443
         originRequest:
