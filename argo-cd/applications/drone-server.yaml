@@ -29,6 +29,9 @@ spec:
         service:
           port: 80
           type: ClusterIP
+        persistence:
+          enabled: true
+          existingClaim: drone-server-pvc
   syncPolicy:
     automated:
       prune: true
