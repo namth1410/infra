@@ -31,7 +31,7 @@ spec:
           type: ClusterIP
         persistence:
           enabled: true
-          existingClaim: drone-server-pvc
+          existingClaim: drone-server
   syncPolicy:
     automated:
       prune: true
