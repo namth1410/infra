@@ -25,7 +25,7 @@ spec:
               notary: /harbor/notary
           tls:
             enabled: false
-          externalURL: http://localhost:32104/harbor
+          externalURL: http://localhost:32104
 
         harborAdminPassword: "01664157092a"
 
