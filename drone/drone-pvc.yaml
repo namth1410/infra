@@ -18,4 +18,4 @@ spec:
   # Tên StorageClass bạn đang sử dụng
   storageClassName: local-path
   # Tên của PV cũ ở trạng thái "Available" mà bạn muốn kết nối vào
-  volumeName: "pvc-397cf01a-f3d9-430b-ba4b-264620485aa8"
+  volumeName: "pvc-e401e6fb-d9eb-42d0-851a-e431e4194d87"
