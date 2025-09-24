@@ -5,32 +5,33 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://helm.goharbor.io
-    chart: harbor
-    targetRevision: 1.17.2
-    helm:
-      values: |
-        expose:
-          type: loadBalancer
-          tls:
-            enabled: false
-          externalURL: http://harbor.namth.online
+  sources:
+    - repoURL: https://helm.goharbor.io
+      chart: harbor
+      targetRevision: 1.17.2
+      helm:
+        values: |
+          expose:
+            type: clusterIP
+            externalURL: https://harbor.namth.online
 
-        harborAdminPassword: "01664157092a"
+          harborAdminPassword: "01664157092a"
 
-        persistence:
-          persistentVolumeClaim:
-            registry:
-              size: 5Gi
-            chartmuseum:
-              size: 1Gi
-            jobservice:
-              size: 1Gi
-            database:
-              size: 1Gi
-            redis:
-              size: 1Gi
+          persistence:
+            persistentVolumeClaim:
+              registry:
+                size: 5Gi
+              chartmuseum:
+                size: 1Gi
+              jobservice:
+                size: 1Gi
+              database:
+                size: 1Gi
+              redis:
+                size: 1Gi
+    - repoURL: https://github.com/namth1410/infra.git
+      targetRevision: main
+      path: harbor
   destination:
     server: https://kubernetes.default.svc
     namespace: harbor

@@ -8,17 +8,31 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
 spec:
   rules:
-    - host: localhost
+    - host: harbor.namth.online
       http:
         paths:
-          - path: /
+          - path: /api/
             pathType: Prefix
             backend:
               service:
-                name: harbor-portal
+                name: harbor-core
                 port:
                   number: 80
-          - path: /api/
+          - path: /service/
+            pathType: Prefix
+            backend:
+              service:
+                name: harbor-core
+                port:
+                  number: 80
+          - path: /v2/
+            pathType: Prefix
+            backend:
+              service:
+                name: harbor-core
+                port:
+                  number: 80
+          - path: /chartrepo/
             pathType: Prefix
             backend:
               service:
@@ -32,10 +46,10 @@ spec:
                 name: harbor-core
                 port:
                   number: 80
-          - path: /v2/
+          - path: /
             pathType: Prefix
             backend:
               service:
-                name: harbor-core
+                name: harbor-portal
                 port:
                   number: 80
