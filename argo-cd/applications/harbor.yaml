@@ -13,7 +13,9 @@ spec:
       values: |
         expose:
           type: loadBalancer
-          externalURL: https://harbor.namth.online
+          tls:
+            enabled: false
+          externalURL: http://harbor.namth.online
 
         harborAdminPassword: "01664157092a"
 
