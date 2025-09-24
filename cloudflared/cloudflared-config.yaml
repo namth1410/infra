@@ -11,6 +11,8 @@ data:
     ingress:
       - hostname: harbor.namth.online
         service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:80
+        originRequest:
+          httpHostHeader: harbor.namth.online 
       - hostname: drone.namth.online
         service: http://drone-server.drone.svc.cluster.local:80
       - hostname: threads.namth.online
