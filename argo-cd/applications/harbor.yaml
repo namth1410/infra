@@ -14,6 +14,8 @@ spec:
           expose:
             type: clusterIP
             externalURL: https://harbor.namth.online
+            tls:
+              enabled: false
 
           harborAdminPassword: "01664157092a"
 
