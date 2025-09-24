@@ -29,16 +29,26 @@ spec:
         service:
           port: 80
           type: ClusterIP
+        
+        # --- THAY ĐỔI QUAN TRỌNG BẮT ĐẦU TỪ ĐÂY ---
+
+        # 1. Tắt module persistence của chart để nó không tạo PVC ảo nữa
         persistence:
-          enabled: true
-          existingClaim: drone-server
+          enabled: false
+
+        # 2. Tiêm vào một volume, trỏ đến PVC do 'drone-storage' quản lý
+        extraVolumes:
+          - name: drone-data
+            persistentVolumeClaim:
+              claimName: drone-server
+
+        # 3. Tiêm vào một volume mount, yêu cầu container sử dụng volume trên
+        extraVolumeMounts:
+          - name: drone-data
+            mountPath: /data
+
+  # Bỏ luôn ignoreDifferences vì bây giờ đã hết xung đột
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
-    ignoreDifferences:
-      - group: "" # group core của Kubernetes là chuỗi rỗng
-        kind: PersistentVolumeClaim
-        name: drone-server
-        jsonPointers:
-          - /spec # Bỏ qua mọi khác biệt trong toàn bộ spec của PVC
