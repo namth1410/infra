@@ -10,7 +10,7 @@ data:
 
     ingress:
       - hostname: harbor.namth.online
-        service: http://harbor-portal.harbor.svc.cluster.local:80
+        service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:80
       - hostname: drone.namth.online
         service: http://drone-server.drone.svc.cluster.local:80
       - hostname: threads.namth.online
