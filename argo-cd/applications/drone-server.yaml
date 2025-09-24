@@ -31,7 +31,7 @@ spec:
           type: ClusterIP
         persistence:
           enabled: false
-          existingClaim: drone-server
+          
         extraVolumes:
           - name: drone-data
             persistentVolumeClaim:
@@ -41,7 +41,7 @@ spec:
         extraVolumeMounts:
           - name: drone-data
             mountPath: /data
-            
+
   syncPolicy:
     automated:
       prune: true
