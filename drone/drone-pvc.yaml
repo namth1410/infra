@@ -8,6 +8,7 @@ metadata:
   # Annotation này ra lệnh cho ArgoCD không bao giờ xóa PVC này
   annotations:
     argocd.argocroj.io/sync-options: Prune=false
+    argocd.argocroj.io/managed-by: argocd/drone-storage
 spec:
   accessModes:
     - ReadWriteOnce
