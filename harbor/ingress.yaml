@@ -10,7 +10,7 @@ metadata:
     # THÊM CÁC ANNOTATIONS SAU VÀO
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    # nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/proxy-set-header: "X-Forwarded-Proto $scheme"
 spec:
   ingressClassName: nginx
