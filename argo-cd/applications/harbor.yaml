@@ -25,7 +25,7 @@ spec:
               notary: /notary
           tls:
             enabled: false   # bật true nếu bạn muốn HTTPS với cert-manager/Let's Encrypt
-          externalURL: http://harbor.namth.online
+          externalURL: https://harbor.namth.online
 
         harborAdminPassword: "01664157092a"
 
