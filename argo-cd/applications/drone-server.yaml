@@ -36,9 +36,9 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  # ignoreDifferences:
-  #   - group: apps
-  #     kind: Deployment
-  #     jsonPointers:
-  #       - /spec/template/spec/containers/0/readinessProbe
-  #       - /spec/template/spec/containers/0/livenessProbe
+    ignoreDifferences:
+      - group: "" # group core của Kubernetes là chuỗi rỗng
+        kind: PersistentVolumeClaim
+        name: drone-server
+        jsonPointers:
+          - /spec # Bỏ qua mọi khác biệt trong toàn bộ spec của PVC
