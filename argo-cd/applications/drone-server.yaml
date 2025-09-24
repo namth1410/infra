@@ -29,14 +29,9 @@ spec:
         service:
           port: 80
           type: ClusterIP
-        
-        # --- THAY ĐỔI QUAN TRỌNG BẮT ĐẦU TỪ ĐÂY ---
-
-        # 1. Tắt module persistence của chart để nó không tạo PVC ảo nữa
         persistence:
           enabled: false
-
-        # 2. Tiêm vào một volume, trỏ đến PVC do 'drone-storage' quản lý
+          existingClaim: drone-server
         extraVolumes:
           - name: drone-data
             persistentVolumeClaim:
@@ -46,9 +41,9 @@ spec:
         extraVolumeMounts:
           - name: drone-data
             mountPath: /data
-
-  # Bỏ luôn ignoreDifferences vì bây giờ đã hết xung đột
+            
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
+
