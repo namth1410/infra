@@ -2,21 +2,14 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  # Tên PVC này phải khớp với giá trị `existingClaim` trong chart Drone
-  name: drone-server
+  name: drone-server # Giữ tên này vì ứng dụng Drone đang dùng nó
   namespace: drone
-  # Annotation này ra lệnh cho ArgoCD không bao giờ xóa PVC này
-  annotations:
-    argocd.argocroj.io/sync-options: Prune=false
-    argocd.argocroj.io/managed-by: argocd/drone-storage
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      # Dung lượng phải khớp với PV cũ bạn muốn dùng lại
-      storage: 8Gi 
-  # Tên StorageClass bạn đang sử dụng
-  storageClassName: local-path
-  # Tên của PV cũ ở trạng thái "Available" mà bạn muốn kết nối vào
-  volumeName: "pvc-e401e6fb-d9eb-42d0-851a-e431e4194d87"
+      storage: 8Gi # Dung lượng phải khớp với PV
+  storageClassName: local-path # Phải khớp với PV
+  # Dòng quan trọng nhất: Yêu cầu đích danh PV đã tạo ở trên
+  volumeName: "drone-server-pv"

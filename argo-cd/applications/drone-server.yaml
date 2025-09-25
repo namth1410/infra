@@ -46,11 +46,3 @@ spec:
     automated:
       prune: true
       selfHeal: true
-  ignoreDifferences:
-  - group: ""  # Core API group
-    kind: PersistentVolumeClaim
-    name: drone-server
-    # Chỉ thị cho Argo CD bỏ qua mọi khác biệt trong phần 'spec' của PVC
-    jsonPointers:
-    - /spec
-

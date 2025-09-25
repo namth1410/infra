@@ -1,0 +1,24 @@
+# path: drone/drone-pv.yaml
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  # Đặt một cái tên mới, rõ ràng
+  name: drone-server-pv
+spec:
+  capacity:
+    storage: 8Gi # Dung lượng bạn muốn
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain # Vẫn giữ Retain để bảo vệ dữ liệu
+  storageClassName: local-path # Phải khớp với StorageClass của bạn
+  local:
+    # Đường dẫn thực tế trên worker node mà bạn đã chọn
+    path: "/data/drone-server"
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - "master-node" 
