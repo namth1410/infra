@@ -46,8 +46,8 @@ spec:
     automated:
       prune: true
       selfHeal: true
-resourceCustomizations:
-  # Chỉ thị cho Argo CD lờ đi hoàn toàn tài nguyên PVC tên là drone-server
-  "PersistentVolumeClaim/drone-server":
-    ignore: true 
+  resourceCustomizations:
+    # Chỉ thị cho Argo CD lờ đi hoàn toàn tài nguyên PVC tên là drone-server
+    "PersistentVolumeClaim/drone-server":
+      ignore: true 
 
