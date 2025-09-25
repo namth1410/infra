@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: https://github.com/namth1410/infra.git # Thay bằng URL repo của bạn
     targetRevision: main
-    path: drone # <--- Trỏ tới thư mục chứa drone-pvc.yaml
+    path: drone/storage # <--- Trỏ tới thư mục chứa drone-pvc.yaml
 
   # Đích: Namespace nơi PVC sẽ được tạo
   destination:
