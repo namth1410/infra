@@ -46,3 +46,12 @@ spec:
     automated:
       prune: true
       selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+    ignoreDifferences:
+    - group: "" # Core API group
+      kind: PersistentVolumeClaim
+      name: drone-server
+      jsonPointers:
+      - /spec/volumeName
+      - /spec/storageClassName
