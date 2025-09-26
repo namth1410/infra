@@ -15,3 +15,7 @@ argocd login localhost:8080 --username admin --password ibhLYtMlTn7mdpag
 argo 8080
 thread-fe 8081
 drone 8082
+
+#### Harbor
+project Threads, secret robot account
+lFdeqWCaMmYLtw3IynhGiixZYX8yf7mR
