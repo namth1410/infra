@@ -32,15 +32,7 @@ spec:
         persistence:
           enabled: true
           existingClaim: drone-server
-        # extraVolumes:
-        #   - name: drone-data
-        #     persistentVolumeClaim:
-        #       claimName: drone-server
 
-        # 3. Tiêm vào một volume mount, yêu cầu container sử dụng volume trên
-        # extraVolumeMounts:
-        #   - name: drone-data
-        #     mountPath: /data
 
   syncPolicy:
     automated:
