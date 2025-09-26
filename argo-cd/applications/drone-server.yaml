@@ -39,8 +39,7 @@ spec:
             port: 80
             type: ClusterIP
           persistence:
-            enabled: true
-            existingClaim: drone-server
+            enabled: false
 
   # VẪN GIỮ NGUYÊN ignoreDifferences
   ignoreDifferences:
