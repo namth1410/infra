@@ -1,25 +1,28 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: harbor
+  name: harbor-bitnami
   namespace: argocd
 spec:
   project: default
   sources:
-    - repoURL: https://helm.goharbor.io
+    - repoURL: https://charts.bitnami.com/bitnami
       chart: harbor
-      targetRevision: 1.17.2
+      targetRevision: 27.0.3   # chọn version mới nhất 27.x.x
       helm:
         values: |
           externalURL: https://harbor.namth.online
+
+          harborAdminPassword: "01664157092a"
+
+          # cấu hình expose, tùy chart version 27 có thể khác
           expose:
             type: clusterIP
             tls:
               enabled: false
 
-          harborAdminPassword: "01664157092a"
-
           persistence:
+            enabled: true
             persistentVolumeClaim:
               registry:
                 size: 5Gi
@@ -41,3 +44,49 @@ spec:
     automated:
       prune: true
       selfHeal: true
+
+
+
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: harbor
+#   namespace: argocd
+# spec:
+#   project: default
+#   sources:
+#     - repoURL: https://helm.goharbor.io
+#       chart: harbor
+#       targetRevision: 1.17.2
+#       helm:
+#         values: |
+#           externalURL: https://harbor.namth.online
+#           expose:
+#             type: clusterIP
+#             tls:
+#               enabled: false
+
+#           harborAdminPassword: "01664157092a"
+
+#           persistence:
+#             persistentVolumeClaim:
+#               registry:
+#                 size: 5Gi
+#               chartmuseum:
+#                 size: 1Gi
+#               jobservice:
+#                 size: 1Gi
+#               database:
+#                 size: 1Gi
+#               redis:
+#                 size: 1Gi
+#     - repoURL: https://github.com/namth1410/infra.git
+#       targetRevision: main
+#       path: harbor
+#   destination:
+#     server: https://kubernetes.default.svc
+#     namespace: harbor
+#   syncPolicy:
+#     automated:
+#       prune: true
+#       selfHeal: true
