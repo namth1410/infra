@@ -5,35 +5,48 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  sources:
-    - repoURL: https://helm.goharbor.io
-      chart: harbor
-      targetRevision: 1.17.2
-      helm:
-        values: |
-          expose:
-            type: clusterIP
-            externalURL: https://harbor.namth.online
-            tls:
-              enabled: false
+  source: # <-- Đã đổi thành "source" (số ít)
+    repoURL: https://helm.goharbor.io
+    chart: harbor
+    targetRevision: 1.17.2
+    helm:
+      values: |
+        # Báo cho chart biết sẽ expose qua Ingress
+        expose:
+          type: ingress # <-- THAY ĐỔI QUAN TRỌNG NHẤT
+          tls:
+            enabled: false
+          ingress:
+            # Đặt tên host cho portal và core
+            hosts:
+              core: harbor.namth.online
+              portal: harbor.namth.online
+            # Chỉ định Ingress Controller
+            controller: nginx
+            # Copy toàn bộ annotations từ file Ingress cũ của bạn vào đây
+            annotations:
+              nginx.ingress.kubernetes.io/proxy-body-size: "0"
+              nginx.ingress.kubernetes.io/ssl-redirect: "true"
+              nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+              nginx.ingress.kubernetes.io/proxy-set-header: "X-Forwarded-Proto $scheme"
 
-          harborAdminPassword: "01664157092a"
+        # Giữ nguyên giá trị externalURL để các thành phần khác biết
+        externalURL: https://harbor.namth.online
 
-          persistence:
-            persistentVolumeClaim:
-              registry:
-                size: 5Gi
-              chartmuseum:
-                size: 1Gi
-              jobservice:
-                size: 1Gi
-              database:
-                size: 1Gi
-              redis:
-                size: 1Gi
-    - repoURL: https://github.com/namth1410/infra.git
-      targetRevision: main
-      path: harbor
+        # Giữ nguyên các cấu hình khác
+        harborAdminPassword: "01664157092a"
+        persistence:
+          persistentVolumeClaim:
+            registry:
+              size: 5Gi
+            chartmuseum:
+              size: 1Gi
+            jobservice:
+              size: 1Gi
+            database:
+              size: 1Gi
+            redis:
+              size: 1Gi
   destination:
     server: https://kubernetes.default.svc
     namespace: harbor
