@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/namth/threads-infra.git'
+    repoURL: 'https://github.com/namth1410/infra.git'
     targetRevision: main
     path: storage
   destination:
