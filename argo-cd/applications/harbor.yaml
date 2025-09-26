@@ -2,40 +2,33 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: harbor
-  namespace: argocd
+  namespace: argopd
 spec:
   project: default
   sources:
-    - # --- THAY ĐỔI Ở ĐÂY ---
-      repoURL: https://charts.bitnami.com/bitnami # URL của Bitnami
+    - repoURL: https://charts.bitnami.com/bitnami
       chart: harbor
-      targetRevision: "19.2.5" # Một phiên bản mới và ổn định của chart Bitnami
+      # SỬA LẠI DÒNG NÀY THÀNH PHIÊN BẢN MỚI NHẤT
+      targetRevision: "27.0.3"
       helm:
         values: |
-          # --- CẤU HÌNH THEO CHUẨN BITNAMI ---
-          # Cấu hình domain bên ngoài
+          # Cấu hình theo chuẩn Bitnami (giữ nguyên như cũ)
           externalAccess:
             enabled: true
             autoDiscovery:
-              enabled: true # Tự động cấu hình Ingress
+              enabled: true
 
           harbor:
-            # Domain chính của Harbor
             externalDomain: harbor.namth.online
-            # Mật khẩu admin
-            adminPassword: "01664157092a" # ĐẶT LẠI MẬT KHẨU MỚI
+            adminPassword: "YourNewAdminPassword123!"
 
-          # Vô hiệu hóa TLS bên trong chart, vì Ingress Controller sẽ xử lý
           ingress:
             enabled: true
-            selfSigned: false # Không tự tạo cert
+            selfSigned: false
 
-          # Tạm thời vô hiệu hóa persistence để test cho nhanh
           persistence:
             enabled: false
           
-          # Các thành phần khác giữ mặc định để đảm bảo ổn định
-
     - repoURL: https://github.com/namth10/infra.git
       targetRevision: main
       path: harbor
