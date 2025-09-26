@@ -33,6 +33,13 @@ spec:
           enabled: true
           existingClaim: drone-server
 
+  ignoreDifferences:
+  - group: "" # Core API group
+    kind: PersistentVolumeClaim
+    name: drone-server
+    jsonPointers:
+    - /spec/volumeName
+    - /spec/storageClassName
 
   syncPolicy:
     automated:
@@ -40,10 +47,3 @@ spec:
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
-    ignoreDifferences:
-    - group: "" # Core API group
-      kind: PersistentVolumeClaim
-      name: drone-server
-      jsonPointers:
-      - /spec/volumeName
-      - /spec/storageClassName
