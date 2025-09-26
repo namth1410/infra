@@ -2,27 +2,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: drone-storage # Tên application quản lý storage
+  name: drone-storage
   namespace: argocd
   finalizers:
-    - resources-finalizer.argocd.argoproj.io # Giữ Application này không bị xóa nhầm
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
-
-  # Nguồn: Trỏ đến chính repo này, và thư mục con là 'drone'
   source:
-    repoURL: https://github.com/namth1410/infra.git # Thay bằng URL repo của bạn
+    repoURL: https://github.com/namth1410/infra.git
     targetRevision: main
-    path: drone/storage # <--- Trỏ tới thư mục chứa drone-pvc.yaml
-
-  # Đích: Namespace nơi PVC sẽ được tạo
+    path: drone/storage # <--- CHÍNH XÁC, chỉ quản lý PV
   destination:
     server: https://kubernetes.default.svc
+    # PV không thuộc namespace nào, nhưng để destination ở đây cũng không sao
     namespace: drone
-
   syncPolicy:
     automated:
-      prune: true # Prune=true ở đây vẫn an toàn vì file PVC đã có Prune=false
+      prune: true
       selfHeal: true
     syncOptions:
-      - CreateNamespace=true # Tự động tạo namespace 'drone' nếu chưa có
+      - CreateNamespace=true
