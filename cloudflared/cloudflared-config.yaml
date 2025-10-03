@@ -19,6 +19,10 @@ data:
         service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:80
       - hostname: threads-api.namth.online
         service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:80
+        originRequest:
+          http2Origin: true          
+          connectTimeout: 30s
+          tcpKeepAlive: 30s
       - hostname: minio-api.namth.online
         service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:80
       - hostname: minio.namth.online
