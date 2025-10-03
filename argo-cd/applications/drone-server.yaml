@@ -41,6 +41,12 @@ spec:
           persistence:
             enabled: false
 
+    - repoURL: https://github.com/namth1410/infra.git
+      targetRevision: main
+      path: drone/drone-server
+      directory:
+        recurse: true
+
   # VẪN GIỮ NGUYÊN ignoreDifferences
   ignoreDifferences:
   - group: ""

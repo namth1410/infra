@@ -14,17 +14,17 @@ data:
         originRequest:
           httpHostHeader: harbor.namth.online 
       - hostname: drone.namth.online
-        service: http://drone-server.drone.svc.cluster.local:80
+        service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:80
       - hostname: threads.namth.online
-        service: http://threads.threads-dev.svc.cluster.local:80
+        service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:80
       - hostname: threads-api.namth.online
-        service: http://api.threads-dev.svc.cluster.local:3000
+        service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:80
       - hostname: minio-api.namth.online
-        service: http://minio-api.threads-dev.svc.cluster.local:9000
+        service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:80
       - hostname: minio.namth.online
-        service: http://minio-console.threads-dev.svc.cluster.local:9001
+        service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:80
       - hostname: argocd.namth.online
-        service: https://argocd-server.argocd.svc.cluster.local:443
+        service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:80
         originRequest:
           noTLSVerify: true
       - service: http_status:404
