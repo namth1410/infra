@@ -79,9 +79,11 @@ spec:
                   cpu: 500m
 
           # Node Exporter - collect node metrics
-          # Disabled due to port 9100 conflict (already in use)
+          # Disabled hostPort to avoid conflict with port 9100 (used by antigravity)
+          # Prometheus will scrape via Service instead of hostPort
           nodeExporter:
-            enabled: false
+            enabled: true
+            hostNetwork: false
 
           # Kube State Metrics - collect k8s object metrics
           kubeStateMetrics:
