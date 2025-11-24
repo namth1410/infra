@@ -1,0 +1,114 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      chart: kube-prometheus-stack
+      targetRevision: 65.8.1
+      helm:
+        values: |
+          # Prometheus Configuration
+          prometheus:
+            prometheusSpec:
+              retention: 15d
+              storageSpec:
+                volumeClaimTemplate:
+                  spec:
+                    storageClassName: local-path
+                    accessModes: ["ReadWriteOnce"]
+                    resources:
+                      requests:
+                        storage: 10Gi
+              # Enable ServiceMonitor auto-discovery
+              serviceMonitorSelectorNilUsesHelmValues: false
+              podMonitorSelectorNilUsesHelmValues: false
+              ruleSelectorNilUsesHelmValues: false
+              # Resource limits
+              resources:
+                requests:
+                  memory: 2Gi
+                  cpu: 500m
+                limits:
+                  memory: 4Gi
+                  cpu: 2000m
+
+          # Grafana Configuration
+          grafana:
+            enabled: true
+            adminPassword: "admin123456"  # Change this or use random
+            persistence:
+              enabled: true
+              storageClassName: local-path
+              size: 2Gi
+            ingress:
+              enabled: false  # We'll create separate ingress
+            # Default dashboards
+            defaultDashboardsEnabled: true
+            defaultDashboardsTimezone: Asia/Ho_Chi_Minh
+            # Resources
+            resources:
+              requests:
+                memory: 256Mi
+                cpu: 100m
+              limits:
+                memory: 512Mi
+                cpu: 500m
+
+          # AlertManager Configuration
+          alertmanager:
+            enabled: true
+            alertmanagerSpec:
+              storage:
+                volumeClaimTemplate:
+                  spec:
+                    storageClassName: local-path
+                    accessModes: ["ReadWriteOnce"]
+                    resources:
+                      requests:
+                        storage: 2Gi
+              resources:
+                requests:
+                  memory: 256Mi
+                  cpu: 100m
+                limits:
+                  memory: 512Mi
+                  cpu: 500m
+
+          # Node Exporter - collect node metrics
+          nodeExporter:
+            enabled: true
+
+          # Kube State Metrics - collect k8s object metrics
+          kubeStateMetrics:
+            enabled: true
+
+          # Prometheus Operator
+          prometheusOperator:
+            resources:
+              requests:
+                memory: 256Mi
+                cpu: 100m
+              limits:
+                memory: 512Mi
+                cpu: 500m
+
+    # Custom resources from Git
+    - repoURL: https://github.com/namth1410/infra.git
+      targetRevision: main
+      path: monitoring
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: monitoring
+
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
