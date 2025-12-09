@@ -9,10 +9,6 @@ data:
     credentials-file: /etc/cloudflared/58c2d850-c1d3-4c31-8954-864c772e37de.json
 
     ingress:
-      - hostname: harbor.namth.online
-        service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:80
-        originRequest:
-          httpHostHeader: harbor.namth.online 
       - hostname: drone.namth.online
         service: http://ingress-nginx-controller.ingress-nginx.svc.cluster.local:80
       - hostname: threads.namth.online
